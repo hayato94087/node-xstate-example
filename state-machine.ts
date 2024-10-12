@@ -5,23 +5,30 @@ export const toggleMachine = setup({
     // 型定義
     context: {} as {
       count: number; // カウンター
+      maxCount: number; // カウンターの最大値
     },
     input: {} as {
       initialCount?: number; // カウンターの初期値
-    }
+      maxCount: number; // カウンターの最大値
+    },
   },
 }).createMachine({
   id: "toggle", // ステートマシンの ID
   initial: "Inactive", // Inactive 状態を初期状態とする
   context: ({ input }) => ({
     count: input.initialCount ?? 0, // カウンター
+    maxCount: input.maxCount, // カウンターの最大値
   }),
   states: {
     // Inactive 状態
     Inactive: {
       on: {
-        // toggleイベントを受け取ったら Active 状態に遷移
-        toggle: "Active",
+        toggle: {
+          // カウンターがmaxCount未満の場合にのみtoggle遷移をトリガーする
+          guard: ({ context }) => context.count < context.maxCount, 
+          // toggleイベントを受け取ったら Active 状態に遷移
+          target: "Active",
+        },
       },
     },
     // Active 状態

@@ -6,9 +6,10 @@ import { toggleMachine } from "./state-machine";
 const actor = createActor(toggleMachine, {
   input: {
     initialCount: 10, // カウンターの初期値
+    maxCount: 11, // カウンターの最大値
   },
- });
- 
+});
+
 // Actor からのスナップショット (送信された状態変化) を購読します。
 // 実装は、Actor の開始時、ステートマシンの状態が変化するたびに呼び出されます。
 //
