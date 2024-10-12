@@ -28,7 +28,7 @@ actor.subscribe({
       second: "2-digit",
       hour12: false,
     });
-    console.log(`ステート:${snapshot.value}, \t現在時間:${japanTime}, `);
+    console.log(`ステート:${snapshot.value}, \tカウンター:${snapshot.context.count}, \t現在時間:${japanTime}`);
   },
   error: (err: unknown) => {
     // エラーが発生した場合の処理
