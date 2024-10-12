@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "es2017",
+
+    /* Modules */
+    "module": "esnext",
+    "moduleResolution": "node",
+
+    /* Emit */
+    "sourceMap": true,
+    "outDir": "./dist",
+
+    /* Interop Constraints */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
+    "strict": true,
+
+    /* Completeness */
+    "skipLibCheck": true,
+
+    /* JavaScript Support */
+    "allowJs": true,
+  },
+  "include": ["**/*.ts","**/*.js"],
+  "exclude": ["node_modules", "dist"]
+}
