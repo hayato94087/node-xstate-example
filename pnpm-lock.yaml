@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      xstate:
+        specifier: ^5.18.2
+        version: 5.18.2
     devDependencies:
       '@types/node':
         specifier: ^22.7.5
@@ -338,6 +342,9 @@ packages:
       terser:
         optional: true
 
+  xstate@5.18.2:
+    resolution: {integrity: sha512-hab5VOe29D0agy8/7dH1lGw+7kilRQyXwpaChoMu4fe6rDP+nsHYhDYKfS2O4iXE7myA98TW6qMEudj/8NXEkA==}
+
 snapshots:
 
   '@esbuild/aix-ppc64@0.21.5':
@@ -565,3 +572,5 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.7.5
       fsevents: 2.3.3
+
+  xstate@5.18.2: {}
