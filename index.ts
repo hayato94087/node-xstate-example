@@ -3,8 +3,12 @@ import { toggleMachine } from "./state-machine";
 
 // Actor を作成し、イベントを送信できるようにします。
 // 注意: Actor はまだ開始されていません！
-const actor = createActor(toggleMachine);
-
+const actor = createActor(toggleMachine, {
+  input: {
+    initialCount: 10, // カウンターの初期値
+  },
+ });
+ 
 // Actor からのスナップショット (送信された状態変化) を購読します。
 // 実装は、Actor の開始時、ステートマシンの状態が変化するたびに呼び出されます。
 //
@@ -28,7 +32,9 @@ actor.subscribe({
       second: "2-digit",
       hour12: false,
     });
-    console.log(`ステート:${snapshot.value}, \tカウンター:${snapshot.context.count}, \t現在時間:${japanTime}`);
+    console.log(
+      `ステート:${snapshot.value}, \tカウンター:${snapshot.context.count}, \t現在時間:${japanTime}`
+    );
   },
   error: (err: unknown) => {
     // エラーが発生した場合の処理
@@ -43,10 +49,10 @@ actor.start(); // "Inactive" 状態
 actor.send({ type: "toggle" }); // "Active"へ遷移
 
 // 5秒間スリープ。スリープ中にInactiveに遷移します。
-await new Promise(resolve => setTimeout(resolve, 5000)); // スリープ中に "Inactive" へ遷移
+await new Promise((resolve) => setTimeout(resolve, 5000)); // スリープ中に "Inactive" へ遷移
 
 // イベントを送信します
-actor.send({ type: 'toggle' }); // "Active" へ遷移
+actor.send({ type: "toggle" }); // "Active" へ遷移
 
 // アクターを停止します
 actor.stop();

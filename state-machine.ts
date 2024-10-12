@@ -6,11 +6,16 @@ export const toggleMachine = setup({
     context: {} as {
       count: number; // カウンター
     },
+    input: {} as {
+      initialCount?: number; // カウンターの初期値
+    }
   },
 }).createMachine({
   id: "toggle", // ステートマシンの ID
   initial: "Inactive", // Inactive 状態を初期状態とする
-  context: { count: 0 }, // カウンターを定義し初期化
+  context: ({ input }) => ({
+    count: input.initialCount ?? 0, // カウンター
+  }),
   states: {
     // Inactive 状態
     Inactive: {
