@@ -41,7 +41,12 @@ actor.start(); // "Inactive" 状態
 
 // イベントを送信します
 actor.send({ type: "toggle" }); // "Active"へ遷移
-actor.send({ type: "toggle" }); // "Inactive"へ遷移
+
+// 5秒間スリープ。スリープ中にInactiveに遷移します。
+await new Promise(resolve => setTimeout(resolve, 5000)); // スリープ中に "Inactive" へ遷移
+
+// イベントを送信します
+actor.send({ type: 'toggle' }); // "Active" へ遷移
 
 // アクターを停止します
 actor.stop();

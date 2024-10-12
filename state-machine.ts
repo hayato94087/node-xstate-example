@@ -15,6 +15,7 @@ export const toggleMachine = createMachine({
     Active: {
       // toggleイベントを受け取ったら Inactive 状態に遷移
       on: { toggle: "Inactive" },
+      after: { 2000: 'Inactive' }, // 2秒後に遷移
     },
   },
 });
