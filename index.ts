@@ -5,8 +5,8 @@ import { toggleMachine } from "./state-machine";
 // 注意: Actor はまだ開始されていません！
 const actor = createActor(toggleMachine, {
   input: {
-    initialCount: 10, // カウンターの初期値
-    maxCount: 11, // カウンターの最大値
+    initialCount: 0, // カウンターの初期値
+    maxCount: 4, // カウンターの最大値
   },
 });
 
@@ -54,6 +54,30 @@ await new Promise((resolve) => setTimeout(resolve, 5000)); // スリープ中に
 
 // イベントを送信します
 actor.send({ type: "toggle" }); // "Active" へ遷移
+
+// イベントを送信します
+actor.send({ type: 'toggle' }); //"Inactive" へ遷移
+
+// イベントを送信します
+actor.send({ type: 'toggle' }); // "Active" へ遷移
+
+// イベントを送信します
+actor.send({ type: 'toggle' }); // "Inactive" へ遷移
+
+// イベントを送信します
+actor.send({ type: 'toggle' }); // "Active" へ遷移
+
+// イベントを送信します
+actor.send({ type: 'toggle' }); // "Inactive" へ遷移
+
+// イベントを送信します
+actor.send({ type: 'reset' }); // 50%の確率でカウンターがリセットされ、"Inactive" へ遷移
+
+// 5秒間スリープ。スリープ中に上記のresetが実行されます。
+await new Promise(resolve => setTimeout(resolve, 5000));
+
+// イベントを送信します
+actor.send({ type: 'toggle' }); // カウンターのリセットが成功している場合は "Active" へ遷移、失敗している場合は "Inactive"のまま
 
 // アクターを停止します
 actor.stop();
